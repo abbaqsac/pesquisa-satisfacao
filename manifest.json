@@ -1,6 +1,6 @@
 ﻿{
-  "name": "Abba Química",
-  "short_name": "Abba",
+  "name": "ABBA Química",
+  "short_name": "ABBA",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#152B55",
@@ -18,4 +18,5 @@
     }
   ]
 }
+
 
