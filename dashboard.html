@@ -213,7 +213,7 @@ function renderDash(rows) {
   new Chart(document.getElementById('chartPND'), {
     type: 'doughnut',
     data: {
-      labels: ['Detratores (0-6) ' + detratores + ' · ' + Math.round((detratores/total)*100) + '%', 'Neutros (7-8) ' + neutros + ' · ' + Math.round((neutros/total)*100) + '%', 'Promotores (9-10) ' + promotores + ' · ' + Math.round((promotores/total)*100) + '%'],
+      labels: ['Detratores (0-6) ' + detratores, 'Neutros (7-8) ' + neutros, 'Promotores (9-10) ' + promotores],
       datasets: [{ data:[detratores,neutros,promotores], backgroundColor:['#EF4444','#F59E0B','#22C55E'], borderWidth:0 }]
     },
     options: { plugins:{legend:{position:'bottom',labels:{font:{size:12},padding:14}}}, responsive:true, maintainAspectRatio:false, cutout:'62%' }
@@ -253,6 +253,7 @@ window.addEventListener('load', loadData);
 </script>
 </body>
 </html>
+
 
 
 
