@@ -1,0 +1,21 @@
+﻿{
+  "name": "Abba Química",
+  "short_name": "Abba",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#152B55",
+  "theme_color": "#152B55",
+  "icons": [
+    {
+      "src": "/icon-app.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-app.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
