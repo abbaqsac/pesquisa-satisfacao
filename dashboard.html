@@ -210,14 +210,8 @@ function renderDash(rows) {
     options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true,ticks:{stepSize:1}},x:{grid:{display:false}}}, responsive:true, maintainAspectRatio:false }
   });
 
-  new Chart(document.getElementById('chartPND'), {
-    type: 'doughnut',
-    data: {
-      labels: ['Detratores (0-6) ' + detratores, 'Neutros (7-8) ' + neutros, 'Promotores (9-10) ' + promotores],
-      datasets: [{ data:[detratores,neutros,promotores], backgroundColor:['#EF4444','#F59E0B','#22C55E'], borderWidth:0 }]
-    },
-    options: { plugins:{legend:{position:'bottom',labels:{font:{size:12},padding:14}}}, responsive:true, maintainAspectRatio:false, cutout:'62%' }
-  });
+  var pndPlugin={id:'pndLabels',afterDraw:function(chart){var ctx=chart.ctx;ctx.save();ctx.font='bold 14px Segoe UI';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fff';chart.data.datasets.forEach(function(ds,i){chart.getDatasetMeta(i).data.forEach(function(arc,j){var val=ds.data[j];if(!val)return;var pct=Math.round(val/total*100)+'%';var mid=(arc.startAngle+arc.endAngle)/2;var r=(arc.innerRadius+arc.outerRadius)/2;ctx.fillText(pct,arc.x+Math.cos(mid)*r,arc.y+Math.sin(mid)*r);});});ctx.restore();}};
+  new Chart(document.getElementById('chartPND'),{type:'doughnut',plugins:[pndPlugin],data:{labels:['Detratores (0-6) '+detratores,'Neutros (7-8) '+neutros,'Promotores (9-10) '+promotores],datasets:[{data:[detratores,neutros,promotores],backgroundColor:['#EF4444','#F59E0B','#22C55E'],borderWidth:0}]},options:{plugins:{legend:{position:'bottom',labels:{font:{size:12},padding:14}}},responsive:true,maintainAspectRatio:false,cutout:'62%'}});
 
   const byDay = {};
   rows.forEach(r => {
@@ -253,6 +247,9 @@ window.addEventListener('load', loadData);
 </script>
 </body>
 </html>
+
+
+
 
 
 
