@@ -27,7 +27,7 @@ body{font-family:"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(
 .app-header img{height:46px;filter:brightness(0) invert(1)}
 .app-header span{color:rgba(255,255,255,.55);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .main{max-width:1100px;margin:0 auto;padding:32px 24px}
-.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi-row{display:grid;grid-template-columns:repeat(7,1fr);gap:16px;margin-bottom:24px}
 .kpi-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:22px 24px}
 .kpi-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .kpi-value{font-size:36px;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1}
@@ -52,7 +52,7 @@ tr:hover td{background:#FAFCFF}
 .pill{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-size:12px;font-weight:700;color:#fff}
 .p-green{background:var(--green)}.p-yellow{background:var(--yellow)}.p-red{background:var(--red)}
 .loading{text-align:center;padding:80px;color:var(--muted)}
-@media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr}.charts-grid{grid-template-columns:1fr}.chart-card.full{grid-column:1}}
+@media(max-width:700px){.kpi-row{grid-template-columns:1fr 1fr 1fr}.charts-grid{grid-template-columns:1fr}.chart-card.full{grid-column:1}}
 </style>
 </head>
 <body>
@@ -175,7 +175,12 @@ function renderDash(rows) {
   document.getElementById('kpiNPSLabel').textContent = npsLabel;
   document.getElementById('kpiTotal').textContent    = total;
   document.getElementById('kpiMedia').textContent    = media;
-  document.getElementById('kpiPromo').textContent    = promotores;
+  document.getElementById('kpiPromo').textContent       = promotores;
+  document.getElementById('kpiPromoSub').textContent    = Math.round((promotores/total)*100) + '% · notas 9 e 10';
+  document.getElementById('kpiNeutros').textContent     = neutros;
+  document.getElementById('kpiNeutrosSub').textContent  = Math.round((neutros/total)*100) + '% · notas 7 e 8';
+  document.getElementById('kpiDetratores').textContent  = detratores;
+  document.getElementById('kpiDetratoreSub').textContent = Math.round((detratores/total)*100) + '% · notas 0 a 6';
 
   document.getElementById('npsBar').innerHTML = `
     <div style="flex:${detratores};background:#EF4444;height:100%;border-radius:2px"></div>
@@ -198,7 +203,7 @@ function renderDash(rows) {
   new Chart(document.getElementById('chartPND'), {
     type: 'doughnut',
     data: {
-      labels: ['Detratores (0–6)','Neutros (7–8)','Promotores (9–10)'],
+      labels: [\Detratores (0-6) \ · \%\,\Neutros (7-8) \ · \%\,\Promotores (9-10) \ · \%\],
       datasets: [{ data:[detratores,neutros,promotores], backgroundColor:['#EF4444','#F59E0B','#22C55E'], borderWidth:0 }]
     },
     options: { plugins:{legend:{position:'bottom',labels:{font:{size:12},padding:14}}}, responsive:true, maintainAspectRatio:false, cutout:'62%' }
@@ -238,6 +243,7 @@ window.addEventListener('load', loadData);
 </script>
 </body>
 </html>
+
 
 
 
